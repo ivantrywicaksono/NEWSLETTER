@@ -9,11 +9,13 @@ using System.Drawing.Printing;
 using System.Reflection.Metadata.Ecma335;
 using System.Xml.Linq;
 using NEWSLETTER_FIX;
+using System.Security.Cryptography.X509Certificates;
 
 namespace NEWSLETTER_FIX.Models
 {
     public class NewsletterItem
     {
+        private readonly Newsletter id_newsletter;
         PictureBox newsItem = new();
         Newsletter Newsletter;
 
@@ -39,8 +41,16 @@ namespace NEWSLETTER_FIX.Models
         {
             using (Form2 updateForm = new Form2())
             {
+                NewsletterContext newsletterContext = new NewsletterContext();
                 updateForm.SetNewsletter(Newsletter);
-                updateForm.ShowDialog();
+                DialogResult dr = updateForm.ShowDialog();
+
+                if (dr == DialogResult.Ignore)
+                {
+                    
+                }
+
+                
             }
 
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
@@ -124,6 +125,24 @@ namespace NEWSLETTER_FIX.Models
             connection.Close();
 
             return newsletter;
+        }
+
+        public bool Delete(Newsletter newsletter)
+        {
+            bool isSuccess = false;
+            using (NpgsqlConnection connection = new(connectionString))
+            {
+                string sql = "DELETE FROM newsletter WHERE news_id = @news_id";
+                connection.Open();
+                using (NpgsqlCommand command = new(sql,connection))
+                {
+                    command.Parameters.Add("news_id", NpgsqlTypes.NpgsqlDbType.Integer).Value = newsletter.Id;
+                    command.CommandType = System.Data.CommandType.Text;
+                    int jmlDataDiHapus = command.ExecuteNonQuery();
+                    if (jmlDataDiHapus > 0) isSuccess = true;
+                }
+            }
+            return isSuccess;
         }
     }
 }

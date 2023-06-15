@@ -42,8 +42,10 @@ namespace NEWSLETTER_FIX
 
         private void button9_Click(object sender, EventArgs e)
         {
-            new Form2().Show();
-            this.Close();
+            this.Hide();
+            new Form2().ShowDialog();
+            this.Show();
+            //this.Hide();
         }
 
         private void Form1_Load(object sender, EventArgs e)
