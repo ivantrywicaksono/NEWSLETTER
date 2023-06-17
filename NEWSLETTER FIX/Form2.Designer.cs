@@ -40,16 +40,16 @@
             btnback = new Button();
             lblnewsletter = new Label();
             pnlmain = new Panel();
-            dtptanggal = new DateTimePicker();
+            datePickerNewsletter = new DateTimePicker();
             lbltanggal = new Label();
-            tblink = new TextBox();
+            tbNewsLink = new TextBox();
             lbllink = new Label();
-            tbdeskripsi = new TextBox();
+            tbNewsDescription = new TextBox();
             lbldeskripsi = new Label();
-            tbjudul = new TextBox();
+            tbNewsTitle = new TextBox();
             lbljudul = new Label();
             pbnewsletterheading = new PictureBox();
-            btnsave = new Button();
+            btnSave = new Button();
             btndelete = new Button();
             pnlsidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pblogo).BeginInit();
@@ -183,7 +183,7 @@
             btnback.TabIndex = 5;
             btnback.Text = " ";
             btnback.UseVisualStyleBackColor = false;
-            btnback.Click += button8_Click;
+            btnback.Click += BtnBack_Click;
             // 
             // lblnewsletter
             // 
@@ -205,16 +205,16 @@
             pnlmain.AutoScroll = true;
             pnlmain.AutoScrollMinSize = new Size(787, 1688);
             pnlmain.BackColor = Color.White;
-            pnlmain.Controls.Add(dtptanggal);
+            pnlmain.Controls.Add(datePickerNewsletter);
             pnlmain.Controls.Add(lbltanggal);
-            pnlmain.Controls.Add(tblink);
+            pnlmain.Controls.Add(tbNewsLink);
             pnlmain.Controls.Add(lbllink);
-            pnlmain.Controls.Add(tbdeskripsi);
+            pnlmain.Controls.Add(tbNewsDescription);
             pnlmain.Controls.Add(lbldeskripsi);
-            pnlmain.Controls.Add(tbjudul);
+            pnlmain.Controls.Add(tbNewsTitle);
             pnlmain.Controls.Add(lbljudul);
             pnlmain.Controls.Add(pbnewsletterheading);
-            pnlmain.Controls.Add(btnsave);
+            pnlmain.Controls.Add(btnSave);
             pnlmain.Controls.Add(btndelete);
             pnlmain.Location = new Point(151, 44);
             pnlmain.Margin = new Padding(3, 2, 3, 2);
@@ -222,13 +222,13 @@
             pnlmain.Size = new Size(689, 368);
             pnlmain.TabIndex = 14;
             // 
-            // dtptanggal
+            // datePickerNewsletter
             // 
-            dtptanggal.Location = new Point(30, 332);
-            dtptanggal.Margin = new Padding(3, 2, 3, 2);
-            dtptanggal.Name = "dtptanggal";
-            dtptanggal.Size = new Size(219, 23);
-            dtptanggal.TabIndex = 15;
+            datePickerNewsletter.Location = new Point(30, 332);
+            datePickerNewsletter.Margin = new Padding(3, 2, 3, 2);
+            datePickerNewsletter.Name = "datePickerNewsletter";
+            datePickerNewsletter.Size = new Size(219, 23);
+            datePickerNewsletter.TabIndex = 15;
             // 
             // lbltanggal
             // 
@@ -240,15 +240,15 @@
             lbltanggal.TabIndex = 14;
             lbltanggal.Text = "Tanggal";
             // 
-            // tblink
+            // tbNewsLink
             // 
-            tblink.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tblink.Location = new Point(30, 272);
-            tblink.Margin = new Padding(3, 2, 3, 2);
-            tblink.Name = "tblink";
-            tblink.Size = new Size(613, 23);
-            tblink.TabIndex = 13;
-            tblink.TextChanged += textBox3_TextChanged;
+            tbNewsLink.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tbNewsLink.Location = new Point(30, 272);
+            tbNewsLink.Margin = new Padding(3, 2, 3, 2);
+            tbNewsLink.Name = "tbNewsLink";
+            tbNewsLink.Size = new Size(613, 23);
+            tbNewsLink.TabIndex = 13;
+            tbNewsLink.TextChanged += textBox3_TextChanged;
             // 
             // lbllink
             // 
@@ -260,14 +260,14 @@
             lbllink.TabIndex = 12;
             lbllink.Text = "Link";
             // 
-            // tbdeskripsi
+            // tbNewsDescription
             // 
-            tbdeskripsi.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tbdeskripsi.Location = new Point(30, 213);
-            tbdeskripsi.Margin = new Padding(3, 2, 3, 2);
-            tbdeskripsi.Name = "tbdeskripsi";
-            tbdeskripsi.Size = new Size(613, 23);
-            tbdeskripsi.TabIndex = 11;
+            tbNewsDescription.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tbNewsDescription.Location = new Point(30, 213);
+            tbNewsDescription.Margin = new Padding(3, 2, 3, 2);
+            tbNewsDescription.Name = "tbNewsDescription";
+            tbNewsDescription.Size = new Size(613, 23);
+            tbNewsDescription.TabIndex = 11;
             // 
             // lbldeskripsi
             // 
@@ -279,14 +279,14 @@
             lbldeskripsi.TabIndex = 10;
             lbldeskripsi.Text = "Deskripsi";
             // 
-            // tbjudul
+            // tbNewsTitle
             // 
-            tbjudul.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tbjudul.Location = new Point(30, 154);
-            tbjudul.Margin = new Padding(3, 2, 3, 2);
-            tbjudul.Name = "tbjudul";
-            tbjudul.Size = new Size(613, 23);
-            tbjudul.TabIndex = 9;
+            tbNewsTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tbNewsTitle.Location = new Point(30, 154);
+            tbNewsTitle.Margin = new Padding(3, 2, 3, 2);
+            tbNewsTitle.Name = "tbNewsTitle";
+            tbNewsTitle.Size = new Size(613, 23);
+            tbNewsTitle.TabIndex = 9;
             // 
             // lbljudul
             // 
@@ -309,20 +309,21 @@
             pbnewsletterheading.TabIndex = 7;
             pbnewsletterheading.TabStop = false;
             // 
-            // btnsave
+            // btnSave
             // 
-            btnsave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnsave.BackColor = Color.FromArgb(5, 163, 165);
-            btnsave.Cursor = Cursors.Hand;
-            btnsave.Font = new Font("Poppins Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
-            btnsave.ForeColor = Color.White;
-            btnsave.Location = new Point(501, 400);
-            btnsave.Margin = new Padding(3, 2, 3, 2);
-            btnsave.Name = "btnsave";
-            btnsave.Size = new Size(149, 32);
-            btnsave.TabIndex = 6;
-            btnsave.Text = "Save";
-            btnsave.UseVisualStyleBackColor = false;
+            btnSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnSave.BackColor = Color.FromArgb(5, 163, 165);
+            btnSave.Cursor = Cursors.Hand;
+            btnSave.Font = new Font("Poppins Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(501, 400);
+            btnSave.Margin = new Padding(3, 2, 3, 2);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(149, 42);
+            btnSave.TabIndex = 6;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
             // 
             // btndelete
             // 
@@ -376,16 +377,16 @@
         private Button btnback;
         private Label lblnewsletter;
         private Panel pnlmain;
-        private Button btnsave;
+        private Button btnSave;
         private Button btndelete;
         private PictureBox pbnewsletterheading;
         private Label lbljudul;
-        private TextBox tblink;
+        private TextBox tbNewsLink;
         private Label lbllink;
-        private TextBox tbdeskripsi;
+        private TextBox tbNewsDescription;
         private Label lbldeskripsi;
-        private TextBox tbjudul;
-        private DateTimePicker dtptanggal;
+        private TextBox tbNewsTitle;
+        private DateTimePicker datePickerNewsletter;
         private Label lbltanggal;
     }
 }

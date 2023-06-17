@@ -15,7 +15,6 @@ namespace NEWSLETTER_FIX.Models
 {
     public class NewsletterItem
     {
-        private readonly Newsletter id_newsletter;
         PictureBox newsItem = new();
         Newsletter Newsletter;
 
@@ -47,12 +46,9 @@ namespace NEWSLETTER_FIX.Models
 
                 if (dr == DialogResult.Ignore)
                 {
-                    
+
                 }
-
-                
             }
-
         }
     }
 }

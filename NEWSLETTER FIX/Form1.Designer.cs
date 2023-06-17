@@ -37,25 +37,17 @@
             btnumkmm = new Button();
             pnlsidebarr = new Panel();
             lblnewsletterr = new Label();
-            btnbackk = new Button();
+            btnBack = new Button();
             pnlnavbarr = new Panel();
             lblnewsletterrr = new Label();
             pnlmainn = new Panel();
             flpNewsletter = new FlowLayoutPanel();
-            pbgambar1 = new PictureBox();
-            pbgambar2 = new PictureBox();
-            pbgambar3 = new PictureBox();
             btnAddNews = new Button();
-            btnsavee = new Button();
-            btndeletee = new Button();
             ((System.ComponentModel.ISupportInitialize)pblogoo).BeginInit();
             pnlsidebarr.SuspendLayout();
             pnlnavbarr.SuspendLayout();
             pnlmainn.SuspendLayout();
             flpNewsletter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbgambar1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbgambar2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbgambar3).BeginInit();
             SuspendLayout();
             // 
             // pblogoo
@@ -169,29 +161,29 @@
             lblnewsletterr.TabIndex = 0;
             lblnewsletterr.Text = "Newsletter";
             // 
-            // btnbackk
+            // btnBack
             // 
-            btnbackk.BackColor = Color.Transparent;
-            btnbackk.Cursor = Cursors.Hand;
-            btnbackk.FlatAppearance.BorderSize = 0;
-            btnbackk.FlatStyle = FlatStyle.Flat;
-            btnbackk.Image = (Image)resources.GetObject("btnbackk.Image");
-            btnbackk.ImageAlign = ContentAlignment.MiddleLeft;
-            btnbackk.Location = new Point(10, 8);
-            btnbackk.Margin = new Padding(2);
-            btnbackk.Name = "btnbackk";
-            btnbackk.Size = new Size(24, 27);
-            btnbackk.TabIndex = 5;
-            btnbackk.Text = " ";
-            btnbackk.UseVisualStyleBackColor = false;
-            btnbackk.Click += button8_Click;
+            btnBack.BackColor = Color.Transparent;
+            btnBack.Cursor = Cursors.Hand;
+            btnBack.FlatAppearance.BorderSize = 0;
+            btnBack.FlatStyle = FlatStyle.Flat;
+            btnBack.Image = (Image)resources.GetObject("btnBack.Image");
+            btnBack.ImageAlign = ContentAlignment.MiddleLeft;
+            btnBack.Location = new Point(10, 8);
+            btnBack.Margin = new Padding(2);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(24, 27);
+            btnBack.TabIndex = 5;
+            btnBack.Text = " ";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += BtnBack_Click;
             // 
             // pnlnavbarr
             // 
             pnlnavbarr.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlnavbarr.BackColor = Color.FromArgb(55, 163, 165);
             pnlnavbarr.BackgroundImage = (Image)resources.GetObject("pnlnavbarr.BackgroundImage");
-            pnlnavbarr.Controls.Add(btnbackk);
+            pnlnavbarr.Controls.Add(btnBack);
             pnlnavbarr.Controls.Add(lblnewsletterr);
             pnlnavbarr.Location = new Point(151, 0);
             pnlnavbarr.Margin = new Padding(3, 2, 3, 2);
@@ -216,8 +208,6 @@
             pnlmainn.AutoScrollMinSize = new Size(787, 1688);
             pnlmainn.BackColor = Color.White;
             pnlmainn.Controls.Add(flpNewsletter);
-            pnlmainn.Controls.Add(btnsavee);
-            pnlmainn.Controls.Add(btndeletee);
             pnlmainn.Controls.Add(lblnewsletterrr);
             pnlmainn.Location = new Point(151, 44);
             pnlmainn.Margin = new Padding(3, 2, 3, 2);
@@ -229,90 +219,25 @@
             // flpNewsletter
             // 
             flpNewsletter.AutoScroll = true;
-            flpNewsletter.Controls.Add(pbgambar1);
-            flpNewsletter.Controls.Add(pbgambar2);
-            flpNewsletter.Controls.Add(pbgambar3);
             flpNewsletter.Controls.Add(btnAddNews);
             flpNewsletter.Location = new Point(18, 47);
             flpNewsletter.Name = "flpNewsletter";
             flpNewsletter.Size = new Size(618, 128);
             flpNewsletter.TabIndex = 13;
             // 
-            // pbgambar1
-            // 
-            pbgambar1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pbgambar1.BackgroundImageLayout = ImageLayout.Stretch;
-            pbgambar1.Location = new Point(3, 2);
-            pbgambar1.Margin = new Padding(3, 2, 3, 2);
-            pbgambar1.Name = "pbgambar1";
-            pbgambar1.Size = new Size(196, 56);
-            pbgambar1.TabIndex = 8;
-            pbgambar1.TabStop = false;
-            pbgambar1.Click += pictureBox2_Click;
-            // 
-            // pbgambar2
-            // 
-            pbgambar2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pbgambar2.BackgroundImageLayout = ImageLayout.Stretch;
-            pbgambar2.Location = new Point(205, 2);
-            pbgambar2.Margin = new Padding(3, 2, 3, 2);
-            pbgambar2.Name = "pbgambar2";
-            pbgambar2.Size = new Size(196, 56);
-            pbgambar2.TabIndex = 9;
-            pbgambar2.TabStop = false;
-            // 
-            // pbgambar3
-            // 
-            pbgambar3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pbgambar3.BackgroundImageLayout = ImageLayout.Stretch;
-            pbgambar3.Location = new Point(407, 2);
-            pbgambar3.Margin = new Padding(3, 2, 3, 2);
-            pbgambar3.Name = "pbgambar3";
-            pbgambar3.Size = new Size(196, 56);
-            pbgambar3.TabIndex = 10;
-            pbgambar3.TabStop = false;
-            // 
             // btnAddNews
             // 
             btnAddNews.BackgroundImage = (Image)resources.GetObject("btnAddNews.BackgroundImage");
             btnAddNews.BackgroundImageLayout = ImageLayout.Zoom;
             btnAddNews.Font = new Font("Poppins Black", 30F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddNews.Location = new Point(3, 62);
+            btnAddNews.Location = new Point(3, 2);
             btnAddNews.Margin = new Padding(3, 2, 3, 2);
             btnAddNews.Name = "btnAddNews";
             btnAddNews.Size = new Size(196, 56);
             btnAddNews.TabIndex = 12;
             btnAddNews.Text = " ";
             btnAddNews.UseVisualStyleBackColor = true;
-            btnAddNews.Click += button9_Click;
-            // 
-            // btnsavee
-            // 
-            btnsavee.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnsavee.BackColor = Color.FromArgb(5, 163, 165);
-            btnsavee.Cursor = Cursors.Hand;
-            btnsavee.Font = new Font("Poppins Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
-            btnsavee.ForeColor = Color.White;
-            btnsavee.Location = new Point(501, 400);
-            btnsavee.Margin = new Padding(3, 2, 3, 2);
-            btnsavee.Name = "btnsavee";
-            btnsavee.Size = new Size(149, 32);
-            btnsavee.TabIndex = 6;
-            btnsavee.Text = "Save";
-            btnsavee.UseVisualStyleBackColor = false;
-            // 
-            // btndeletee
-            // 
-            btndeletee.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btndeletee.Cursor = Cursors.Hand;
-            btndeletee.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btndeletee.Location = new Point(236, 400);
-            btndeletee.Margin = new Padding(3, 2, 3, 2);
-            btndeletee.Name = "btndeletee";
-            btndeletee.Size = new Size(210, 32);
-            btndeletee.TabIndex = 5;
-            btndeletee.Text = "Delete";
-            btndeletee.UseVisualStyleBackColor = true;
+            btnAddNews.Click += BtnAddNews_Click;
             // 
             // Form1
             // 
@@ -336,9 +261,6 @@
             pnlmainn.ResumeLayout(false);
             pnlmainn.PerformLayout();
             flpNewsletter.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pbgambar1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbgambar2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbgambar3).EndInit();
             ResumeLayout(false);
         }
 
@@ -352,15 +274,10 @@
         private Button btnumkmm;
         private Panel pnlsidebarr;
         private Label lblnewsletterr;
-        private Button btnbackk;
+        private Button btnBack;
         private Panel pnlnavbarr;
         private Label lblnewsletterrr;
         private Panel pnlmainn;
-        private Button btndeletee;
-        private Button btnsavee;
-        private PictureBox pbgambar3;
-        private PictureBox pbgambar2;
-        private PictureBox pbgambar1;
         private Button btnAddNews;
         private FlowLayoutPanel flpNewsletter;
     }

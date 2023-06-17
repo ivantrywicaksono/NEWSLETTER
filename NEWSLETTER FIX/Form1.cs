@@ -10,7 +10,7 @@ namespace NEWSLETTER_FIX
             InitializeComponent();
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void BtnBack_Click(object sender, EventArgs e)
         {
 
         }
@@ -40,12 +40,32 @@ namespace NEWSLETTER_FIX
 
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void BtnAddNews_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Form2().ShowDialog();
+            using (Form2 addNewForm = new())
+            {
+                DialogResult dr = addNewForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Newsletter newsletter = addNewForm.GetNewsletter();
+                    if (newsletterContext.Insert(newsletter))
+                    {
+                        newsletterContext.ReadAll();
+                        MessageBox.Show(
+                            "Date: " + newsletterContext.Newsletters.Last().Date +
+                            "\nTitle: " + newsletterContext.Newsletters.Last().Title +
+                            "\nDescription: " + newsletterContext.Newsletters.Last().Description +
+                            "\nLink: " + newsletterContext.Newsletters.Last().Link +
+                            "\nID: " + newsletterContext.Newsletters.Last().Id
+                        );
+                    }
+                    else
+                        MessageBox.Show("Gagal");
+                }
+            }
             this.Show();
-            //this.Hide();
+            ShowItems();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -64,7 +84,6 @@ namespace NEWSLETTER_FIX
             foreach (var newsletter in newsletters.TakeLast(3))
             {
                 PictureBox newsItem = new NewsletterItem(newsletter).CreateItem();
-                newsItem.Text = newsletter.Title;
                 flpNewsletter.Controls.Add(newsItem);
             }
 
