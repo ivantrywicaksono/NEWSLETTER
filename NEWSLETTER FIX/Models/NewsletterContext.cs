@@ -18,37 +18,53 @@ namespace NEWSLETTER_FIX.Models
         public bool Insert(Newsletter newsletter)
         {
             bool isSuccess = false;
+            byte[] imageBytes;
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Image image = newsletter.Image;
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                imageBytes = ms.ToArray();
+            }
 
             using (NpgsqlConnection connection = new(connectionString))
             {
 
                 string sql = "INSERT INTO newsletter " +
-                    "(tanggal, judul, deskripsi, link_berita) " +
-                    "VALUES (@news_date, @news_title, @news_description, @news_link)";
+                    "(judul, tanggal, link_berita, homepage_id_homepage, deskripsi, foto) " +
+                    "VALUES (@news_title, @news_date, @news_link, @homepage_id, @news_description, @news_image)";
 
-                using (NpgsqlCommand command = new(sql, connection))
+                try
                 {
-                    command.Parameters.Add("news_date", NpgsqlTypes.NpgsqlDbType.Date).Value = newsletter.Date;
-                    command.Parameters.AddWithValue("news_title", newsletter.Title);
+                    using (NpgsqlCommand command = new(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("news_title", newsletter.Title);
+                        command.Parameters.Add("news_date", NpgsqlTypes.NpgsqlDbType.Date).Value = newsletter.Date;
+                        command.Parameters.AddWithValue("news_link", newsletter.Link);
 
-                    if (!string.IsNullOrWhiteSpace(newsletter.Description))
-                        command.Parameters.AddWithValue("news_description", newsletter.Description);
-                    else
-                        command.Parameters.AddWithValue("news_description", DBNull.Value);
+                        if (!string.IsNullOrWhiteSpace(newsletter.Description))
+                            command.Parameters.AddWithValue("news_description", newsletter.Description);
+                        else
+                            command.Parameters.AddWithValue("news_description", DBNull.Value);
 
-                    command.Parameters.AddWithValue("news_link", newsletter.Link);
+                        command.Parameters.Add("@homepage_id", NpgsqlTypes.NpgsqlDbType.Integer).Value = 1;
+                        command.Parameters.Add("@news_image", NpgsqlTypes.NpgsqlDbType.Bytea).Value = imageBytes;
 
-                    connection.Open();
+                        connection.Open();
 
-                    command.Prepare();
-                    int rowsAffected = command.ExecuteNonQuery();
-                    command.Parameters.Clear();
+                        command.Prepare();
+                        int rowsAffected = command.ExecuteNonQuery();
+                        command.Parameters.Clear();
 
-                    connection.Close();
+                        connection.Close();
 
-                    isSuccess = rowsAffected > 0;
+                        isSuccess = rowsAffected > 0;
+                    }
                 }
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
                 if (isSuccess) _newsletters.Add(newsletter);
             }
 
@@ -59,38 +75,55 @@ namespace NEWSLETTER_FIX.Models
         {
             bool isSuccess = false;
 
-            using (NpgsqlConnection connection = new(connectionString))
+            try
             {
-                string sql = "SELECT * FROM newsletter";
-
-                using NpgsqlCommand command = new(sql, connection);
-
-                connection.Open();
-                NpgsqlDataReader reader = command.ExecuteReader();
-
-                _newsletters.Clear();
-
-                while (reader.Read())
+                using (NpgsqlConnection connection = new(connectionString))
                 {
-                    string description = General.ConvertFromDBVal<string>(reader["deskripsi"]);
+                    string sql = "SELECT * FROM newsletter";
 
-                    Newsletter newsletter = new
-                    (
-                        DateOnly.FromDateTime((DateTime)reader["tanggal"]),
-                        (string)reader["judul"],
-                        description,
-                        (string)reader["link_berita"],
-                        (int)reader["id_newsletter"]
-                    );
+                    using NpgsqlCommand command = new(sql, connection);
 
-                    _newsletters.Add(newsletter);
+                    connection.Open();
+                    NpgsqlDataReader reader = command.ExecuteReader();
+
+                    _newsletters.Clear();
+
+                    while (reader.Read())
+                    {
+                        string description = General.ConvertFromDBVal<string>(reader["deskripsi"]);
+                        //Image image;
+                        byte[] imageBytes = (byte[])reader["foto"];
+
+                        {
+                            //if (imageBytes.Length > 0)
+                            //{
+                            using MemoryStream ms = new MemoryStream(imageBytes);
+                            Image image = Image.FromStream(ms);
+                            //}
+
+                            Newsletter newsletter = new
+                            (
+                                DateOnly.FromDateTime((DateTime)reader["tanggal"]),
+                                (string)reader["judul"],
+                                description,
+                                (string)reader["link_berita"],
+                                image,
+                                (int)reader["newsletter_id"]
+                            );
+                            newsletter.Image = image;
+                            _newsletters.Add(newsletter);
+                        }
+                    }
+
+                    isSuccess = reader.HasRows;
+
+                    connection.Close();
                 }
-
-                isSuccess = reader.HasRows;
-
-                connection.Close();
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
             return isSuccess;
         }
 
@@ -112,6 +145,13 @@ namespace NEWSLETTER_FIX.Models
             reader.Read();
 
             string description = General.ConvertFromDBVal<string>(reader["deskripsi"]);
+            Image image;
+            byte[] imageBytes = (byte[])reader["foto"];
+
+            using (MemoryStream ms = new MemoryStream(imageBytes))
+            {
+                image = Image.FromStream(ms);
+            }
 
             Newsletter newsletter = new
             (
@@ -119,7 +159,8 @@ namespace NEWSLETTER_FIX.Models
                 (string)reader["judul"],
                 description,
                 (string)reader["link_berita"],
-                (int)reader["id_newsletter"]
+                image,
+                (int)reader["newsletter_id"]
             );
 
             connection.Close();

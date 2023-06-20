@@ -16,7 +16,6 @@ namespace NEWSLETTER_FIX.Models
     public class NewsletterItem
     {
         PictureBox newsItem = new();
-        Newsletter Newsletter;
 
         public NewsletterItem(Newsletter newsletter)
         {
@@ -27,28 +26,28 @@ namespace NEWSLETTER_FIX.Models
             newsItem.Size = new Size(196, 56);
             newsItem.TabIndex = 8;
             newsItem.TabStop = false;
-            newsItem.Click += NewsItem_Click;
-            Newsletter = newsletter;
+            newsItem.Tag = newsletter;
+            newsItem.Image = newsletter.Image;
         }
-        
+
         public PictureBox CreateItem()
         {
             return newsItem;
         }
 
-        public void NewsItem_Click(object sender, EventArgs e)
-        {
-            using (Form2 updateForm = new Form2())
-            {
-                NewsletterContext newsletterContext = new NewsletterContext();
-                updateForm.SetNewsletter(Newsletter);
-                DialogResult dr = updateForm.ShowDialog();
+        //public void NewsItem_Click(object sender, EventArgs e)
+        //{
+        //    using (Form2 updateForm = new Form2())
+        //    {
+        //        NewsletterContext newsletterContext = new NewsletterContext();
+        //        updateForm.SetNewsletter(Newsletter);
+        //        DialogResult dr = updateForm.ShowDialog();
 
-                if (dr == DialogResult.Ignore)
-                {
+        //        if (dr == DialogResult.Ignore)
+        //        {
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
     }
 }

@@ -53,6 +53,7 @@ namespace NEWSLETTER_FIX
                     {
                         newsletterContext.ReadAll();
                         MessageBox.Show(
+                            "Berhasil!\n" +
                             "Date: " + newsletterContext.Newsletters.Last().Date +
                             "\nTitle: " + newsletterContext.Newsletters.Last().Title +
                             "\nDescription: " + newsletterContext.Newsletters.Last().Description +
@@ -84,10 +85,34 @@ namespace NEWSLETTER_FIX
             foreach (var newsletter in newsletters.TakeLast(3))
             {
                 PictureBox newsItem = new NewsletterItem(newsletter).CreateItem();
+                newsItem.Click += NewsItem_Click;
                 flpNewsletter.Controls.Add(newsItem);
             }
 
             flpNewsletter.Controls.Add(btnAddNews);
+        }
+
+        public void NewsItem_Click(object sender, EventArgs e)
+        {
+            using (Form2 updateForm = new Form2())
+            {
+                PictureBox pbNewsletter = sender as PictureBox;
+                Newsletter newsletter = pbNewsletter.Tag as Newsletter;
+                NewsletterContext newsletterContext = new NewsletterContext();
+                updateForm.SetNewsletter(newsletter);
+
+                DialogResult dr = updateForm.ShowDialog();
+
+                if (dr == DialogResult.Ignore)
+                {
+
+                }
+
+                if (dr == DialogResult.OK)
+                {
+
+                }
+            }
         }
     }
 }
