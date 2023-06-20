@@ -302,12 +302,14 @@
             // 
             pbnewsletterheading.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pbnewsletterheading.BackgroundImageLayout = ImageLayout.Stretch;
+            pbnewsletterheading.Cursor = Cursors.Hand;
             pbnewsletterheading.Location = new Point(0, 38);
             pbnewsletterheading.Margin = new Padding(3, 2, 3, 2);
             pbnewsletterheading.Name = "pbnewsletterheading";
             pbnewsletterheading.Size = new Size(669, 76);
             pbnewsletterheading.TabIndex = 7;
             pbnewsletterheading.TabStop = false;
+            pbnewsletterheading.Click += pbnewsletterheading_Click;
             // 
             // btnSave
             // 
